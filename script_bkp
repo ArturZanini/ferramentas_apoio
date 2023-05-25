@@ -1,0 +1,74 @@
+##############################################################
+
+#!/bin/bash
+
+DATA=$(date +%Y%m%d)
+DESTINO="" # caminho para aonde o arquivo deve ser direcionando
+separa="_" # Separador do texto no nome
+ponto="." # Separador de ponto
+ESTENCAO=".sql" # Estenção do arquivo  que será gerado
+
+ # PORTA DE COMUNICAÇÃO
+ P5432='5432'
+ 
+ 
+
+# USUARIOS
+ UPOS='postgres'
+
+# BANCO DE DADOS
+  BGEO='geo'
+
+ # ESQUEMAS
+ SPUB='public'
+ SGEO='geo'
+ SCLI='cliente'
+
+ # TABELAS
+ TLOT='tab_a'
+ TEDI='tab_a'
+ TLOG='tab_a'
+ TEIX='tab_a'
+ TECO='tab_a'
+ TPGV='tab_a'
+
+#IP'S E NOME DO CLIENTE
+
+ 	PVIA='cliente1'
+  IPVIA='10.0.0.1'
+
+    PCAC='cliente2'
+ 	IPCAC='10.0.0.2'
+
+ 	PTRE='cliente3'
+ 	IPTRE='10.0.0.3'
+
+ 	PMON='cliente4'
+    IPMON='10.0.0.4'
+
+	IPITA='cliente5'
+	IPITA='10.0.0.5'
+
+
+	PARR='cliente6'
+	IPITA='10.0.0.6'
+
+	PSAO='cliente7'
+		IPITA='10.0.0.7'
+	
+	PITA='cliente8'
+		IPITA='10.0.0.8'
+
+	PSAO='cliente9'
+		IPITA='10.0.0.9'
+
+#Backup de  sistema de acesso direto
+
+	############# Cliente 1 #########################
+    pg_dump -U $UPOS -h $IPVIA -p $P5432 --insert ${BDUE} > ${DESTINO}${DATA}${separa}${PVIA}${separa}${BDUE}${separa}${DATA}${ESTENCAO} # Bkp da base da Dueto
+    pg_dump -U $UPOS -h $IPVIA -p $P5432 --insert ${PVIA} > ${DESTINO}${DATA}${separa}${PVIA}${separa}${BGEO}${separa}${DATA}${ESTENCAO} # Bbp da base de Viamao Gauss
+    pg_dump -U $UPOS -h $IPVIA -p $P5432 --insert -t ${SPUB}${ponto}${TLOT} ${PVIA} > ${DESTINO}${DATA}${separa}${PVIA}${separa}${TLOT}${separa}${DATA}${ESTENCAO} # G_LOTE
+    pg_dump -U $UPOS -h $IPVIA -p $P5432 --insert -t ${SPUB}${ponto}${TEDI} ${PVIA} > ${DESTINO}${DATA}${separa}${PVIA}${separa}${TEDI}${separa}${DATA}${ESTENCAO} # EDIF
+    pg_dump -U $UPOS -h $IPVIA -p $P5432 --insert -t ${SCLI}${ponto}${TECO} ${PVIA} > ${DESTINO}${DATA}${separa}${PVIA}${separa}${TECO}${separa}${DATA}${ESTENCAO} # ECONOMIA
+    pg_dump -U $UPOS -h $IPVIA -p $P5432 --insert -t ${SPUB}${ponto}${TEIX} ${PVIA} > ${DESTINO}${DATA}${separa}${PVIA}${separa}${TEIX}${separa}${DATA}${ESTENCAO} # EIXOS
+    pg_dump -U $UPOS -h $IPVIA -p $P5432 --insert -t ${SPUB}${ponto}${TLOT} ${PVIA} > ${DESTINO}${DATA}${separa}${PVIA}${separa}${TLOT}${separa}${DATA}${ESTENCAO} # PGV
